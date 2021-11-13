@@ -3,24 +3,16 @@ import { createEditor, Descendant, Editor, Text, Transforms } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
 // import { withHistory } from 'slate-history'
 
-// import type { CustomEditor, CustomElement, CustomText } from 'types/customTypes'
 import {
   CodeElement,
   DefaultElement,
   Leaf,
 } from 'components/BasicRTE/CustomElement'
 import { CustomEditor } from 'components/BasicRTE/CustomEditor'
-
-// declare module 'slate' {
-//   interface CustomTypes {
-//     Editor: CustomEditor
-//     Element: CustomElement
-//     Text: CustomText
-//   }
-// }
+import { Button } from 'components/BasicRTE/Button'
 
 export const BasicRTE = (): JSX.Element => {
-  // const editor = useMemo(() => withReact(createEditor()), [])
+  // ! const editor = useMemo(() => withReact(createEditor()), [])
   const [editor] = useState(() => withReact(createEditor()))
   const [value, setValue] = useState<Descendant[]>(initialValue)
 
@@ -33,7 +25,7 @@ export const BasicRTE = (): JSX.Element => {
     }
   }, [])
 
-  // Define a leaf rendering fn that is memoized w/ `useCallback`
+  // * Define a leaf rendering fn that is memoized w/ `useCallback`
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />
   }, [])
@@ -41,6 +33,7 @@ export const BasicRTE = (): JSX.Element => {
   const isBoldActive = CustomEditor.isBoldMarkActive(editor)
   const isItalicActive = CustomEditor.isItalicMarkActive(editor)
   const isUnderlineActive = CustomEditor.isUnderlineMarkActive(editor)
+  const isCodeBlockActive = CustomEditor.isCodeBlockActive(editor)
 
   return (
     <Slate
@@ -49,7 +42,7 @@ export const BasicRTE = (): JSX.Element => {
       onChange={(newValue) => setValue(newValue)}
     >
       <div className='mb-4 space-x-2'>
-        <button
+        <Button
           className={`px-3 py-0.5 rounded text-sm text-gray-50 bg-blue-500
           ${isBoldActive ? 'bg-blue-600 font-semibold' : 'font-normal'}
           `}
@@ -59,8 +52,8 @@ export const BasicRTE = (): JSX.Element => {
           }}
         >
           <span>Bold</span>
-        </button>
-        <button
+        </Button>
+        <Button
           className={`px-3 py-0.5 rounded text-sm text-gray-50 bg-blue-500 ${
             isItalicActive ? 'bg-blue-600 italic' : 'not-italic'
           }`}
@@ -70,8 +63,8 @@ export const BasicRTE = (): JSX.Element => {
           }}
         >
           <span>Italic</span>
-        </button>
-        <button
+        </Button>
+        <Button
           className={`px-3 py-0.5 rounded text-sm text-gray-50 bg-blue-500 ${
             isUnderlineActive ? 'bg-blue-600 underline' : 'no-underline'
           }`}
@@ -81,16 +74,18 @@ export const BasicRTE = (): JSX.Element => {
           }}
         >
           <span>Underline</span>
-        </button>
-        <button
-          className='px-3 py-0.5 rounded text-sm text-gray-50 bg-blue-500'
+        </Button>
+        <Button
+          className={`px-3 py-0.5 rounded text-sm text-gray-50 bg-blue-500
+          ${isCodeBlockActive && 'bg-blue-600 font-mono'}
+          `}
           onMouseDown={(e) => {
             e.preventDefault()
             CustomEditor.toggleCodeBlock(editor)
           }}
         >
-          Codeblock
-        </button>
+          <span>Codeblock</span>
+        </Button>
       </div>
       <Editable
         autoCapitalize='false'
