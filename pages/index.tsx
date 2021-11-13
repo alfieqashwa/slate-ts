@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import Basic from 'components/Basic'
+import BasicRTE from 'components/BasicRTE'
 
 const Home: NextPage = () => {
   return (
@@ -18,7 +18,12 @@ const Home: NextPage = () => {
         </h1>
 
         {/* start here... */}
-        <Basic />
+        <section className='max-w-xl px-8 pt-4 pb-6 mx-auto mt-10 border-2 border-blue-500 rounded-md'>
+          <h2 className='mb-8 text-3xl font-semibold text-center text-gray-500'>
+            Basic RTE
+          </h2>
+          <BasicRTE />
+        </section>
       </main>
     </div>
   )

@@ -14,6 +14,11 @@ export type BlockquoteElement = {
   children: CustomText[]
 }
 
+export type CodeElement = {
+  type: 'code' | null
+  children: CustomText[]
+}
+
 // export type HeadingElement = {
 //   type: 'heading'
 //   level: number
@@ -21,12 +26,13 @@ export type BlockquoteElement = {
 // }
 
 // export type CustomElement = ParagraphElement | HeadingElement
-export type CustomElement = ParagraphElement | BlockquoteElement
+export type CustomElement = ParagraphElement | CodeElement | BlockquoteElement
 
 export type FormattedText = {
   text: string
-  bold?: true
-  italic?: true
+  bold?: true | null
+  italic?: true | null
+  underline?: true | null
   code?: true
 }
 
