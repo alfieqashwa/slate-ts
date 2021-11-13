@@ -3,7 +3,9 @@ import { CustomEditor as ICustomEditor } from 'types/customTypes'
 
 export const CustomEditor = {
   isBoldMarkActive(editor: ICustomEditor) {
+    // @ts-ignore
     const [match] = Editor.nodes(editor, {
+      // @ts-ignore
       match: (n) => n.bold === true,
       universal: true,
     })
@@ -12,7 +14,9 @@ export const CustomEditor = {
   },
 
   isItalicMarkActive(editor: ICustomEditor) {
+    // @ts-ignore
     const [match] = Editor.nodes(editor, {
+      // @ts-ignore
       match: (n) => n.italic === true,
       universal: true,
     })
@@ -21,7 +25,9 @@ export const CustomEditor = {
   },
 
   isUnderlineMarkActive(editor: ICustomEditor) {
+    // @ts-ignore
     const [match] = Editor.nodes(editor, {
+      // @ts-ignore
       match: (n) => n.underline === true,
       universal: true,
     })
@@ -30,7 +36,9 @@ export const CustomEditor = {
   },
 
   isCodeBlockActive(editor: ICustomEditor) {
+    // @ts-ignore
     const [match] = Editor.nodes(editor, {
+      // @ts-ignore
       match: (n) => n.type === 'code',
     })
 
